@@ -8,8 +8,12 @@ Worked on from time-to-time (mainly in free time) to have some fun with GitHub.
 
 Bear with me if you have a PR, as I'm not normally a Git guy and live my life in TFS/VSTS/Azure Devops (or whatever it's getting called today 😊). Will try and keep this plodding on though
 
+## Info
+
 Nuget: https://www.nuget.org/packages/MapLocation
+
 Install: Install-Package MapLocation -Version 0.0.1
+
 Usage: Generate a new Maps class, passing in MapOptions (see Console App)
 
 ## MapOptions:
