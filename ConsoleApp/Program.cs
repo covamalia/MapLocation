@@ -14,11 +14,15 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            var LocationLatitude = 55.0238094;
-            var LocationLongitude = -1.5151464;
+
+            Console.WriteLine("Enter Latitude");
+            double.TryParse(Console.ReadLine(),out double LocationLatitude);
+            Console.WriteLine("Enter Longitude");
+            double.TryParse(Console.ReadLine(), out double LocationLongitude); 
+
             var map = new Maps(new MapOptions
                                             {
-                                                ApiKey = "AIzaSyDYAw0jNpQtK0O-sti9ZGSnZm1X5WuJsaw",
+                                                ApiKey = Environment.GetEnvironmentVariable("GoogleAPIKey",EnvironmentVariableTarget.User),
                                                 MapType = MapType.GoogleMaps,
                                                 MapImageOptions = new MapImageOptions
                                                 {

@@ -17,7 +17,7 @@ namespace MapLocation
             }
             if (mapOptions.MapType==MapType.GoogleMaps && mapOptions.ApiKey==null)
             {
-                throw new MissingMapOptionException("Google Maps requires an API key");
+                 throw new MissingMapOptionException("Google Maps requires an API key");
             }
             MapType = (MapType)mapOptions.MapType;
             ApiKey = mapOptions.ApiKey;
@@ -143,11 +143,11 @@ namespace MapLocation
                         
                         //not 100% that these will all be from the same instance, but it should mean we are more likely to get data for all of them
                         mapData.Address = results.Select(f=>f.FormattedAddress).First().Trim();
-                        mapData.StreetNumber = results.Select(f => f.AddressComponents.First(g => g.ComponentType==AddressComponentType.StreetNumber)).First()?.LongName;
-                        mapData.Street = results.Select(f => f.AddressComponents.First(g => g.ComponentType==AddressComponentType.Street)).First()?.LongName;
-                        mapData.Town = results.Select(f => f.AddressComponents.First(g => g.ComponentType==AddressComponentType.PostalTown)).First()?.LongName;
-                        mapData.PostCode = results.Select(f => f.AddressComponents.First(g => g.ComponentType == AddressComponentType.PostalCode)).First()?.LongName;
-                        mapData.Country = results.Select(f => f.AddressComponents.First(g => g.ComponentType == AddressComponentType.Country)).First()?.LongName;
+                        mapData.StreetNumber = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType==AddressComponentType.StreetNumber)).First()?.LongName;
+                        mapData.Street = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType==AddressComponentType.Street)).First()?.LongName;
+                        mapData.Town = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType==AddressComponentType.PostalTown)).First()?.LongName;
+                        mapData.PostCode = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType == AddressComponentType.PostalCode)).First()?.LongName;
+                        mapData.Country = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType == AddressComponentType.Country)).First()?.LongName;
                     }
                     break;
                 case MapType.Here:
