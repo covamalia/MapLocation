@@ -22,11 +22,11 @@ namespace ConsoleApp
 
             var map = new Maps(new MapOptions
                                             {
-                                                ApiKey = Environment.GetEnvironmentVariable("GoogleAPIKey",EnvironmentVariableTarget.User),
+                                                ApiKey = Environment.GetEnvironmentVariable("GoogleAPIKey",EnvironmentVariableTarget.Machine),
                                                 MapType = MapType.GoogleMaps,
                                                 MapImageOptions = new MapImageOptions
                                                 {
-                                                    MapImageScale = MapImageScale.Further,
+                                                    MapImageScale = MapImageScale.Close,
                                                     MapImageSize = MapImageSize.Size300x600
                                                 }
                                             });
@@ -42,7 +42,7 @@ namespace ConsoleApp
             var ba = m.MapImage;
             var ms = new MemoryStream(ba);
             var img = Image.Load(ms);
-            img.Save("map.jpg", new JpegEncoder() { Quality=100 });
+            img.Save("map.jpg", new JpegEncoder() { Quality = 100 });
             Console.WriteLine(m.MapUrl);
         }
     }

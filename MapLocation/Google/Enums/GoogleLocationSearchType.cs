@@ -1,5 +1,5 @@
 ﻿namespace MapLocation.Google
 {
-    internal enum GoogleLocationSearchType { Approximate, GeometricCenter, Rooftop };
+    internal enum GoogleLocationSearchType { Unknown, Approximate, GeometricCenter, Rooftop };
 }
 

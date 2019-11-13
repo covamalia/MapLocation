@@ -115,6 +115,7 @@ namespace MapLocation
         {
             return GetMapDataFromLatLong(coordinates.Latitude, coordinates.Longitude);
         }
+        
         public MapData GetMapDataFromLatLong(double Latitude, double Longitude)
         {
             var mapData = new MapData();
@@ -139,15 +140,16 @@ namespace MapLocation
 
 
                         var results = googleMapData.Results
+                                                .Where(o => o.PlusCode != null)
                                                 .OrderBy(p => Array.IndexOf(CustomOrdering, p.Geometry.LocationSearchType));
                         
                         //not 100% that these will all be from the same instance, but it should mean we are more likely to get data for all of them
-                        mapData.Address = results.Select(f=>f.FormattedAddress).First().Trim();
-                        mapData.StreetNumber = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType==AddressComponentType.StreetNumber)).First()?.LongName;
-                        mapData.Street = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType==AddressComponentType.Street)).First()?.LongName;
-                        mapData.Town = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType==AddressComponentType.PostalTown)).First()?.LongName;
-                        mapData.PostCode = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType == AddressComponentType.PostalCode)).First()?.LongName;
-                        mapData.Country = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType == AddressComponentType.Country)).First()?.LongName;
+                        mapData.Address = results.Select(f=>f.FormattedAddress).FirstOrDefault()?.Trim();
+                        mapData.StreetNumber = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType==AddressComponentType.StreetNumber)).FirstOrDefault()?.LongName;
+                        mapData.Street = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType==AddressComponentType.Street)).FirstOrDefault()?.LongName;
+                        mapData.Town = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType==AddressComponentType.PostalTown)).FirstOrDefault()?.LongName;
+                        mapData.PostCode = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType == AddressComponentType.PostalCode)).FirstOrDefault()?.LongName;
+                        mapData.Country = results.Select(f => f.AddressComponents.FirstOrDefault(g => g.ComponentType == AddressComponentType.Country)).FirstOrDefault()?.LongName;
                     }
                     break;
                 case MapType.Here:

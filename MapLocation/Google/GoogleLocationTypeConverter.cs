@@ -19,31 +19,14 @@
                     return GoogleLocationSearchType.GeometricCenter;
                 case "ROOFTOP":
                     return GoogleLocationSearchType.Rooftop;
+                default:
+                    return GoogleLocationSearchType.Unknown;
             }
-            throw new Exception("Cannot unmarshal type LocationSearchType");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
         {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (GoogleLocationSearchType)untypedValue;
-            switch (value)
-            {
-                case GoogleLocationSearchType.Approximate:
-                    serializer.Serialize(writer, "APPROXIMATE");
-                    return;
-                case GoogleLocationSearchType.GeometricCenter:
-                    serializer.Serialize(writer, "GEOMETRIC_CENTER");
-                    return;
-                case GoogleLocationSearchType.Rooftop:
-                    serializer.Serialize(writer, "ROOFTOP");
-                    return;
-            }
-            throw new Exception("Cannot marshal type LocationSearchType");
+            throw new NotImplementedException("Yeah, we wont want to pass back to the APIs, it's read only :)");
         }
 
         public static readonly GoogleLocationTypeConverter Singleton = new GoogleLocationTypeConverter();
