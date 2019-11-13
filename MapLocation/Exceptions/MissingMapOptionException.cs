@@ -7,7 +7,7 @@ namespace MapLocation.Exceptions
 {
         
     [Serializable]
-    internal class MissingMapOptionException : Exception
+    public class MissingMapOptionException : Exception
     {
         public MissingMapOptionException() { }
         public MissingMapOptionException(string message) : base(message) { }
